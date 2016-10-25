@@ -24,8 +24,10 @@ public class CYKV1 {
     static String cadenaInput;// cadena de entrada a evaluar
     static int cadenaLength;// Longitud de la cadenaInput
     static ArrayList<Character> vTerminales = new ArrayList<Character>();// Lista de elementos terminales
+    static ArrayList<Character> vNoTerminales = new ArrayList<Character>();// Lista de elementos no terminales
     static ArrayList<String> produccionesAll = new ArrayList<String>();// Lista de producciones de la gramatica
     static int numProducciones;//Numero de producciones en la gramatica
+    static int numNoTerm;//Numero de elementos no terminales
     static char ntInicial;//Cual es el simbolo de inicio de las producciones
     static String[][] producciones;//Array doble con las producciones
     //static String[][] m; //Matriz de la tabla CYK [las que sean necesarias][numero de elementos terminales]
@@ -115,6 +117,29 @@ public class CYKV1 {
 //        numElementos = listaTerminales.size();
     }
     
+    public static void addNoTerminalsInArraylist(ArrayList<Character> listanoTerminales, ArrayList<Character> listaTerminales, String[][] producciones){// Agrega los elemento de la cadena dentro de la  listaArray si aun no son agregado
+        char letter;
+        String vals;
+        for(int i=0; i<producciones.length; i++){
+            for(int j=0; j<producciones[i].length; j++){
+                vals=producciones[i][j];
+                for(int k=0; k<vals.length();k++){
+                    letter=vals.charAt(k);
+                    if(isTerminalInArray(listanoTerminales,letter)==false && isTerminalInArray(listaTerminales,letter)==false){//Si el elemento no esta en la lista de vTerminales
+                        listanoTerminales.add(letter);
+                    }
+                }
+            }
+        }
+        
+        //Muestra los elementos dentro de la arraylist
+        System.out.print("Elementos no terminales: ");
+        printArrayCharlist(listanoTerminales);
+        numNoTerm=listanoTerminales.size();
+         //Define el numero de elementos en el arraylist
+//        numElementos = listaTerminales.size();
+    }
+    
     public static void printArrayCharlist(ArrayList<Character> arrayList){//Imprimir contenidos del arraylist de caracteres
         for(int i=0; i<arrayList.size();i++){
             System.out.print(arrayList.get(i) + ", ");
@@ -182,16 +207,18 @@ public class CYKV1 {
         ntInicial = in.nextLine().charAt(0);// Se defina el elemento inicial
         numProducciones = countProd(filename);//Se cuenta la cantidad de producciones desde el archivo externo
         archivoDeProduc(filename);//Lee el archivo externo para guardar las producciones en el doublearray producciones
-       System.out.println("\nNumero de producciones dentro del archivo '" + filename + "' = "+numProducciones);
-
+        System.out.println("\nNumero de producciones dentro del archivo '" + filename + "' = "+numProducciones);
+        addNoTerminalsInArraylist(vNoTerminales,vTerminales,producciones);//Obtiene los elementos no terminales y cuenta el numero de no terminales
+        System.out.println("\nNumero de elementos no terminales = "+numNoTerm);
+        
         //Desplegar datos obtenidos
-        System.out.println("\nq0 = " + ntInicial + "\n\nP = ");
+        System.out.println("\n\nq0 = " + ntInicial + "\n\nP = ");
         printArray(producciones);
         //searchQo(ntInicial);
         System.out.println("\nPara la cadena: " + cadenaInput);
         System.out.println("Longitud de cadena de entrada=" + cadenaLength);
         
-        //Se necesita metodo de concatenacion
+        //ejecucion...
     }
     
 }
