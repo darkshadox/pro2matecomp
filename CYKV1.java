@@ -84,6 +84,12 @@ public class CYKV1 {
         }
     }
     
+    public static void printArray(String[][] array){
+        for(int i=0; i< array.length; i++){
+            System.out.println(""+array[i][0]+"->"+array[i][1]);
+        }
+    }
+    
     public static boolean isTerminalInArray(ArrayList<Character> arrayList, char letter){// Verifica si el elemento terminal ya esta o no en el ArrayList
         if(arrayList.contains(letter)){
             return true;
@@ -145,7 +151,7 @@ public class CYKV1 {
         // TODO code application logic here
         Scanner in = new Scanner(System.in);
         System.out.print("Proyecto #2: Algoritmo CYK\n\nCual es la cadena a evaluar:");
-        
+        String filename = "producciones.txt";
         //Cadena
         cadenaInput = in.nextLine();//Recibe la cadena a evaluar
         cadenaLength = cadenaInput.length();//Define la longitud de la cadena
@@ -165,9 +171,10 @@ public class CYKV1 {
         System.out.print("Cual es el elemento de inicio? ");
         ntInicial = in.nextLine().charAt(0);
        //System.out.println("Elemento de inicio: " + ntInicial);
-        numProducciones = countProd("producciones.txt");
+        numProducciones = countProd(filename);
         System.out.println("Numero de producciones = "+numProducciones);
-        
+        archivoDeProduc(filename);
+        printArray(producciones);
         
         //Se necesita metodo de concatenacion
     }
