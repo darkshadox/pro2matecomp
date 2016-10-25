@@ -152,10 +152,15 @@ public class CYKv2 {
         String[][] tablares = new String[num][num];
         for(int i = 0; i < num; i++){
             tablares[i][i+1] = "";
-            for(int j = 0; j < num-1; j++){
+            /*for(int j = 0; j < num-1; j++){
                 if(prod[j][1].length() == 1 && cinput.substring(i, i+1).equals(prod[j][1])){
                     tablares[i][i+1] += prod[j][0];
                 }
+            }*/
+            for(Character vart : vT){
+            	if(vart.charValue().equals(cinput.substring(i, i+1))){
+            		tablares[i][i+1] += vart;
+            	}
             }
         }
         
