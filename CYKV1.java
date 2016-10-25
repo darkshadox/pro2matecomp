@@ -24,13 +24,12 @@ public class CYKV1 {
     static String cadenaInput;// cadena de entrada a evaluar
     static int cadenaLength;// Longitud de la cadenaInput
     static ArrayList<Character> vTerminales = new ArrayList<Character>();// Lista de elementos terminales
-//    static int NumTerminales=0;// Numero de elementos terminales sin que se repitan
     static ArrayList<String> produccionesAll = new ArrayList<String>();// Lista de producciones de la gramatica
     static int numProducciones;//Numero de producciones en la gramatica
     static char ntInicial;//Cual es el simbolo de inicio de las producciones
-    static String[][] m; //Matriz de la tabla CYK [las que sean necesarias][numero de elementos terminales]
     static String[][] producciones;//Array doble con las producciones
-    
+    //static String[][] m; //Matriz de la tabla CYK [las que sean necesarias][numero de elementos terminales]
+
     public static int countProd(String file){//Cuenta el numero de producciones en el documento
         String filename = file;
         String line = null;
@@ -56,7 +55,7 @@ public class CYKV1 {
         return numProd;
     }
     
-    public static void archivoDeProduc(String file){//Funcion de lectura del archivo
+    public static void archivoDeProduc(String file){//Funcion de lectura del archivo para obtener las producciones
         String filename = file;
         String line = null;
         String[] prod;
@@ -84,7 +83,7 @@ public class CYKV1 {
         }
     }
     
-    public static void printArray(String[][] array){
+    public static void printArray(String[][] array){//Imprime el array de las producciones
         for(int i=0; i< array.length; i++){
             System.out.println(""+array[i][0]+"->"+array[i][1]);
         }
@@ -130,7 +129,7 @@ public class CYKV1 {
 //        System.out.println("\nFin de Arraylist.");
     }
     
-    public static void addGrammar (int numofPs){//Agrega las producciones de la gramatica al arraylist produccionesAll
+    public static void addGrammar (int numofPs){//Agrega las producciones de la gramatica al arraylist produccionesAll desde input
         Scanner pr = new Scanner(System.in);
         String input;
         
@@ -152,11 +151,10 @@ public class CYKV1 {
         Scanner in = new Scanner(System.in);
         System.out.print("Proyecto #2: Algoritmo CYK\n\nCual es la cadena a evaluar:");
         String filename = "producciones.txt";
+
         //Cadena
         cadenaInput = in.nextLine();//Recibe la cadena a evaluar
         cadenaLength = cadenaInput.length();//Define la longitud de la cadena
-        System.out.println("cadena de entrada: " + cadenaInput);
-        System.out.println("Longitud de cadena de entrada=" + cadenaLength);
         
         //Elementos terminales
         System.out.print("\nElementos Terminales: ");
@@ -164,17 +162,23 @@ public class CYKV1 {
         System.out.println("\nNumero de elementos Terminales = " + vTerminales.size());
        
         //Producciones
-//        System.out.print("Cual es el numero de producciones? ");
+
+//        System.out.print("Cual es el numero de producciones? ");//Entrada manual por el usuario
 //        numProducciones = in.nextInt();
 //        addGrammar (numProducciones);
         //printArrayStringlist(produccionesAll);//Imprime las producciones para revisar si se agregaron
-        System.out.print("Cual es el elemento de inicio? ");
-        ntInicial = in.nextLine().charAt(0);
-       //System.out.println("Elemento de inicio: " + ntInicial);
-        numProducciones = countProd(filename);
-        System.out.println("Numero de producciones = "+numProducciones);
-        archivoDeProduc(filename);
+        
+        System.out.print("\nCual es el elemento no terminal de inicio? ");
+        ntInicial = in.nextLine().charAt(0);// Se defina el elemento inicial
+        numProducciones = countProd(filename);//Se cuenta la cantidad de producciones desde el archivo externo
+        archivoDeProduc(filename);//Lee el archivo externo para guardar las producciones en el doublearray producciones
+       //System.out.println("Numero de producciones = "+numProducciones);
+
+        //Desplegar datos obtenidos
+        System.out.println("\nq0 = " + ntInicial + "\n\nP = ");
         printArray(producciones);
+        System.out.println("\nPara la cadena: " + cadenaInput);
+        System.out.println("Longitud de cadena de entrada=" + cadenaLength);
         
         //Se necesita metodo de concatenacion
     }
