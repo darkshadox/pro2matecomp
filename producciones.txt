@@ -1,2 +1,4 @@
 A:AB
+A:C
+C:b
 B:a

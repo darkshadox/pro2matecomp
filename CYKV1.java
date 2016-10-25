@@ -129,6 +129,16 @@ public class CYKV1 {
 //        System.out.println("\nFin de Arraylist.");
     }
     
+    public static void searchQo(char q0){//Verifica si el q0 previamente definido si esta en las producciones
+        String val = ""+q0;
+        for(int i = 0; i < producciones.length; i++){
+            if(producciones[i][0]!=val){
+                System.out.println("ERROR: El q0 previamente definido no esta en las producciones.\nTerminando programa.");
+                System.exit(0);
+            }
+        }
+    }
+    
     public static void addGrammar (int numofPs){//Agrega las producciones de la gramatica al arraylist produccionesAll desde input
         Scanner pr = new Scanner(System.in);
         String input;
@@ -177,6 +187,7 @@ public class CYKV1 {
         //Desplegar datos obtenidos
         System.out.println("\nq0 = " + ntInicial + "\n\nP = ");
         printArray(producciones);
+        searchQo(ntInicial);
         System.out.println("\nPara la cadena: " + cadenaInput);
         System.out.println("Longitud de cadena de entrada=" + cadenaLength);
         
