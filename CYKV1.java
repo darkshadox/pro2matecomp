@@ -149,15 +149,15 @@ public class CYKV1 {
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner in = new Scanner(System.in);
-        System.out.print("Proyecto #2: Algoritmo CYK\n\nCual es la cadena a evaluar:");
-        String filename = "producciones.txt";
+        System.out.print("Proyecto #2: Algoritmo CYK\n\nCual es la cadena a evaluar: ");
+        String filename = "producciones.txt";// Nombre del archivo externo de donde se obtiene las producciones
 
         //Cadena
         cadenaInput = in.nextLine();//Recibe la cadena a evaluar
         cadenaLength = cadenaInput.length();//Define la longitud de la cadena
         
         //Elementos terminales
-        System.out.print("\nElementos Terminales: ");
+        System.out.print("\nElementos Terminales en cadena: ");
         addElementsInArraylist(vTerminales,cadenaInput);//Llena la lista de elementos Terminales con la cadena a evaluar y define el numero de elementos terminales
         System.out.println("\nNumero de elementos Terminales = " + vTerminales.size());
        
@@ -172,7 +172,7 @@ public class CYKV1 {
         ntInicial = in.nextLine().charAt(0);// Se defina el elemento inicial
         numProducciones = countProd(filename);//Se cuenta la cantidad de producciones desde el archivo externo
         archivoDeProduc(filename);//Lee el archivo externo para guardar las producciones en el doublearray producciones
-       //System.out.println("Numero de producciones = "+numProducciones);
+       System.out.println("\nNumero de producciones dentro del archivo '" + filename + "' = "+numProducciones);
 
         //Desplegar datos obtenidos
         System.out.println("\nq0 = " + ntInicial + "\n\nP = ");
