@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author darkblshadox
+ * @author darkblshadox, carlations
  */
 public class CYKV1 {
 
@@ -142,8 +142,29 @@ public class CYKV1 {
     
     }
     
-    public static void CYKalgorithm(){
-    
+    public static String[][] CYKalgorithm(int num, Arraylist<Character> vT, String[][] prod, char ntIni, String cinput){
+        String[][] tablares = new String[num][num];
+        for(int i = 0; i < n; i++){
+            tablares[i][i+1] = "";
+            for(int j = 0; j < num; j++){
+                if(prod[j][1].length() == 1 && cinput.substring(i)(i+1).equals(prod[j][1])){
+                    tablares[i][i+1] += prod[j][0];
+                }
+            }
+        }
+        for(int m = 0; m <= num; m++){
+            for(int i = 0; i <= n-m; i++){
+                tablares[i][i+m] = "";
+                for(int j = i+1; j < (i+m-1); j++){
+                    for(int f = 0; f <= num; f++){
+                        if(prod[f][1].length() == 2 && tablares[i][j].contains(prod[f][1].charAt(0)) && tablares[j][i+m].contains(prod[f][1].charAt(1))){
+                            tablares[i][i+m] += prod[f][0];
+                        }
+                    }
+                }
+            }
+        }
+        return tablares;
     }
     
     public static void main(String[] args) {
