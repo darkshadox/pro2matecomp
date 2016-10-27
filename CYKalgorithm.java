@@ -32,8 +32,7 @@ public class CYKalgorithm {
     static char ntInicial;//Cual es el simbolo de inicio de las producciones
     static String[][] producciones;//Array doble con las producciones
     static String[][] AST; //Matriz de la tabla CYK [las que sean necesarias][numero de elementos terminales
-    
-    static ArrayList<String> Abtesting = new ArrayList<String>();
+    static ArrayList<String> Abtesting = new ArrayList<String>();//Arraylist String de ABs para probar si estan presentes en las producciones
 
     public static int countProd(String file){//Cuenta el numero de producciones en el documento
         String filename = file;
