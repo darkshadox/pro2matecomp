@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cyk.v1;
+//package cyk.v1;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -177,26 +177,45 @@ public class CYKV1 {
     
     }
     
-    public static void CYKalgorithm(String w, String[][] p, ArrayList<Character> vN, ArrayList<Character> vT){
+    public static String[][] CYKalgorithm(String w, String[][] p, ArrayList<Character> vN, ArrayList<Character> vT){
         int n = w.length();
-        String[][] table = new String[n][n];
+        String[][] table = new String[n][n+1];
         for(int i = 0; i < w.length(); i++){
             for(int k = 0; k < p.length; k++){
                 if(p[k][1].equals(""+w.charAt(i))){
                     table[i][i+1] += p[k][0];
                 }
             }
+            System.out.println("Sali del primer for :)");
         }
-        for(int j = 2; j <= n; j++){
-            for(int i = j-2; j >= 0; j--){
-                for(k = i+1; k <= j-1; k++){
+        System.out.println("Sali del segundo for :)");
+        for(int j = 2; j < w.length(); j++){
+            for(int i = (j-1); j >= 0; j--){
+                for(int k = (i+1); k <= (j-1); k++){
                     for(int d = 0; d < p.length; d++){
-                        if(vN.contains(p[d][1]) && p[k][1].equals(w.substring(k, k+1)) && table[i][k].contains(w.charAt(0)) && table[k][j].contains(w.charAt(1))) {
+                        if(vN.contains(p[d][1]) && p[k][1].equals(w.substring(k, k+1))
+                         && table[i][k].contains(""+w.charAt(0)) 
+                         && table[k][j].contains(""+w.charAt(1))) {
                             table[i][j] += p[k][0];
                         }
                     }
+                    System.out.println("Sali del 3er for :)");
                 }
+                System.out.println("Sali del 4to for :)");
             }
+            System.out.println("Sali del 5to for por " + j + " vez");
+        }
+        System.out.println("Sali del 6to for :)");
+        return table;
+    }
+    public static void imprimeTabla(String[][] tabla){
+        int n = tabla.length;
+        int m = tabla[1].length;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                System.out.print("| " + tabla[i][j]);
+            }
+            System.out.print(" |\n");
         }
     }
     
@@ -236,8 +255,15 @@ public class CYKV1 {
         //searchQo(ntInicial);
         System.out.println("\nPara la cadena: " + cadenaInput);
         System.out.println("Longitud de cadena de entrada=" + cadenaLength);
+        /*for(int c = 0; c < producciones.length; c++){
+            for (int d = 0; d < producciones[1].length; d++){
+                System.out.print(producciones[c][d] + " |");
+            }
+            System.out.print("\n");
+        }*/
         
         //ejecucion...
+        imprimeTabla(CYKalgorithm(cadenaInput, producciones, vNoTerminales, vTerminales));
     }
     
 }

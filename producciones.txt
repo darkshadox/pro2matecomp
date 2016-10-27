@@ -1,2 +1,8 @@
-A:AB
-B:a
+S:AB
+S:BC
+A:BA
+A:a
+B:CC
+B:b
+C:AB
+C:a
